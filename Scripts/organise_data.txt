@@ -1,0 +1,16 @@
+// K goes from 1 to number of files
+for k = 1:16
+   A = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/'+ string(k*20) + 'MHz to '+ string((k+1)*20) + 'MHz.csv');
+   A_values = A(34:1:534,1);
+// adding the values to data
+  if k== 1 then
+  data = A_values;
+    else  
+    for s = k+((k-1)*500):k+(k*500)
+    data(s,1) = A_values(s-(k+((k-1)*500))+1,1);
+    end
+  end
+
+end
+//Create the data file
+write_csv(data,'C:\Documents and Settings\pflynn\Desktop\Data' + '/data1.csv');

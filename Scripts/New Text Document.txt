@@ -1,0 +1,80 @@
+// Read the data file's
+
+for k = 1:8
+
+
+   A = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/'+ string(k*20) + 'MHz to '+ string((k+1)*20) + 'MHz.csv');
+   A_values = A(34:1:534,1);
+
+  if k== 1 then
+  data = A_values;
+    else  
+    for s = k+((k-1)*500):k+(k*500)
+    data(s,1) = A_values(s-(k+((k-1)*500))+1,1);
+    end
+  end
+
+end
+//Create the data file
+
+write_csv(data,'C:\Documents and Settings\pflynn\Desktop\Data' + '/data.csv');
+
+
+
+
+
+
+
+
+B = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/40MHz to 60MHz.csv');
+C = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/60MHz to 80MHz.csv');
+D = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/80MHz to 100MHz.csv');
+E = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/100MHz to 120MHz.csv');
+F = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/120MHz to 140MHz.csv');
+G = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/160MHz to 180MHz.csv');
+H = read_csv('C:\Program Files\Tektronix\SA2600PC\Results'+'/180MHz to 200MHz.csv');
+
+// Pick out the data from trace 1
+A_values = A(34:1:534,1);
+B_values = B(34:1:534,1);
+C_values = C(34:1:534,1);
+D_values = D(34:1:534,1);
+E_values = E(34:1:534,1);
+F_values = F(34:1:534,1);
+G_values = G(34:1:534,1);
+H_values = H(34:1:534,1);
+
+//Combine the values into one data file
+data = A_values;
+
+for k = 1:501
+data((k+501),1) = B_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*2)),1) = C_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*3)),1) = D_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*4)),1) = E_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*5)),1) = F_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*6)),1) = G_values(k,1);
+end
+
+for k = 1:501
+data((k+(501*7)),1) = H_values(k,1);
+end
+
+//Create the data file
+
+write_csv(data,'C:\Documents and Settings\pflynn\Desktop\Data' + '/data.csv');
